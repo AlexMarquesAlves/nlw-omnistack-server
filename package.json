@@ -1,7 +1,6 @@
 {
   "name": "nlw-omnistack-server",
   "version": "1.0.0",
-  "description": "setup completo para projetos Node.js, utilizando TypeScript, ESLint & Prettier, Jest, Husky & Lint Staged (commit hooks)",
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias",

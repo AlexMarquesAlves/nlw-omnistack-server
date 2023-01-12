@@ -1,4 +1,5 @@
 {
   "workbench.colorTheme": "Omni Owl",
-  "cSpell.words": ["omnistack"]
+  "cSpell.words": ["omnistack"],
+  "prettier.configPath": "./.prettierrc.json"
 }

@@ -12,6 +12,7 @@
     "test:staged": "yarn test --findRelatedTests",
     "test:push": "yarn test --coverage",
     "knex:migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "knex:seed": "knex seed:run --knexfile knexfile.ts",
     "postinstall": "yarn husky:prepare"
   },
   "author": "¡Duque",

@@ -6,6 +6,24 @@ const tableItems = "items";
 const tablePointItems = "point_items";
 
 export class PointsController {
+  async index(req: Request, res: Response) {
+    const { city, uf, items } = req.query;
+
+    const parsedItems = String(items)
+      .split(",")
+      .map((item) => Number(item.trim()));
+
+    const points = knex(tablePoints)
+      .join(tablePointItems, `${tablePoints}.id`, `${tablePointItems}.point_id`)
+      .whereIn(`${tablePointItems}.item_id`, parsedItems)
+      .where("city", String(city))
+      .where("uf", String(uf))
+      .distinct()
+      .select(`${tablePoints}.*`);
+
+    return res.json(points);
+  }
+
   async show(req: Request, res: Response) {
     const { id } = req.params;
 
@@ -58,6 +76,8 @@ export class PointsController {
     });
 
     await transactions(tablePointItems).insert(pointItems);
+
+    await transactions.commit();
 
     return res.json({ id: point_id, ...point });
   }

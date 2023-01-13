@@ -2,9 +2,32 @@ import { Request, Response } from "express";
 import knex from "../database/connection";
 
 const tablePoints = "points";
+const tableItems = "items";
 const tablePointItems = "point_items";
 
 export class PointsController {
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const point = await knex(tablePoints).where("id", id).first();
+
+    if (!point) {
+      return res.status(400).json({ message: "Point not found" });
+    }
+
+    const items = await knex(tableItems)
+      .join(
+        tablePointItems,
+        `${tableItems}.id`,
+        "=",
+        `${tablePointItems}.item_id`
+      )
+      .where(`${tablePointItems}.point_id`, id)
+      .select(`${tableItems}.title`);
+
+    return res.json({ point, items });
+  }
+
   async create(req: Request, res: Response) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { name, email, whatsapp, latitude, longitude, city, uf, items } =

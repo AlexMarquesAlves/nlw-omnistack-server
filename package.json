@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "start": "node dist/server.js",
-    "start:dev": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/server.ts' -e ts",
+    "start:dev": "nodemon --ignore node_modules--watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/server.ts' -e ts",
     "husky:prepare": "husky install",
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch",
